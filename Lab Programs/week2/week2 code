@@ -1,0 +1,73 @@
+import java.util.*;
+class Stud_details{
+int marks[]=new int[3];
+int credit[]=new int[3];
+String usn,name;
+Scanner sc = new Scanner(System.in);
+
+void getdetails(){
+System.out.println("Enter the usn and name");
+usn=sc.next();
+name=sc.next();
+System.out.println("Enter the marks");
+for(int i=0;i<3;i++){
+marks[i]=sc.nextInt();
+}
+System.out.println("Enter the credits");
+for(int i=0;i<3;i++){
+credit[i]=sc.nextInt();
+}
+
+}
+
+void display(){
+System.out.println("usn:"+usn);
+System.out.println("name:"+name);
+for(int i=0;i<3;i++){
+System.out.println("marks of"+(i+1)+" subject"+" "+marks[i]);
+}
+System.out.println("SGPA:"+calculateSGPA());
+}
+
+double getgradepoint(int mark){
+if(mark>=90) return 10.0;
+else if(mark>=80) return 9.0;
+else if(mark>=70) return 8.0;
+else if(mark>=60) return 7.0;
+else if(mark>=50) return 6.0;
+else if(mark>=40) return 5.0;
+else return 0.0;
+}
+
+double calculateSGPA(){
+int totalcredits=0;
+double gradepoint=0;
+for(int i=0;i<3;i++){
+totalcredits+=credit[i];
+}
+for(int i=0;i<3;i++){
+gradepoint+=getgradepoint(marks[i])*credit[i];
+}
+return (gradepoint/totalcredits);
+}
+}
+
+
+
+
+class student{
+public static void main(String args[]){
+Stud_details s1[]=new Stud_details[3];
+for(int j=0;j<3;j++){
+s1[j]=new Stud_details();
+}
+for(int j=0;j<3;j++){
+System.out.println("Enter details of "+(j+1)+" student");
+s1[j].getdetails();
+}
+for(int j=0;j<3;j++){
+s1[j].display();
+}
+System.out.println("Name:Ariz Ejaz Khan USN:1BM23CS051");
+}
+}
