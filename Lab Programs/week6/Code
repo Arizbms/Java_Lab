@@ -1,0 +1,105 @@
+//INTERNAL
+
+
+package CIE;
+
+public class Internal{
+public int imarks[];
+public Internal(int[] marks){
+if(marks.length!=5) System.out.println("Need 5 marks!");
+else this.imarks=marks;
+}
+public void displayimarks(){
+System.out.println("Respective CIE marks:");
+for(int i=0;i<5;i++){
+System.out.println(imarks[i]+" ");
+}
+System.out.println();
+}
+
+}
+
+//EXTERNAL
+package SEE;
+import CIE.*;
+public class External extends Student{
+public int[] smarks;
+public External(String usn,String name,int sem,int[] marks){
+super(usn,name,sem);
+if(marks.length!=5) System.out.println("Need 5 marks!");
+else this.smarks=marks;
+}
+public void displaysmarks(){
+System.out.println("Respective SEE marks:");
+for(int i=0;i<5;i++){
+System.out.println(smarks[i]+" ");
+}
+System.out.println();
+}
+}
+
+
+//STUDENT
+package CIE;
+public class Student{
+public String usn;
+public String name;
+public int sem;
+public Student(String usn,String name,int sem){
+this.usn=usn;
+this.name=name;
+this.sem=sem;
+}
+public void display(){
+System.out.println("USN:"+usn+",name:"+name+",sem:"+sem);
+}
+}
+
+
+
+//MAIN
+import CIE.Student;
+import CIE.Internal;
+import SEE.External;
+import java.util.*;
+class MAIN {
+    public static void main(String[] args) {
+Scanner sc=new Scanner(System.in);
+System.out.println("How many students:");
+int n=sc.nextInt();
+External[] students=new External[n];
+Internal[] newmarks=new Internal[n];
+for(int i=0;i<n;i++){
+System.out.println("Enter usn,name,sem:");
+String usn=sc.next();
+String name=sc.next();
+int sem=sc.nextInt();
+System.out.println("Enter internal marks:");
+int[] Imarks=new int[5];
+for(int j=0;j<5;j++){
+Imarks[j]=sc.nextInt();
+}
+System.out.println("Enter external marks:");
+int[] Emarks=new int[5];
+for(int j=0;j<5;j++){
+Emarks[j]=sc.nextInt();
+}
+newmarks[i]=new Internal(Imarks);
+students[i]=new External(usn,name,sem,Emarks);
+}
+System.out.println("Student details:\n:");
+for(int i=0;i<n;i++){
+students[i].display();
+newmarks[i].displayimarks();
+students[i].displaysmarks();
+System.out.println("Final marks:");
+for(int j=0;j<5;j++){
+int finalm=newmarks[i].imarks[j]+students[i].smarks[j];
+System.out.println(finalm+" ");
+}
+System.out.println();
+
+}
+
+}
+}
